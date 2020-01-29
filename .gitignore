@@ -1,0 +1,8 @@
+*.swp
+rootkit/.*
+rootkit/Module.symvers
+rootkit/modules.order
+rootkit/rootkit.ko
+rootkit/rootkit.mod.c
+rootkit/rootkit.mod.o
+rootkit/rootkit.o
