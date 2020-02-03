@@ -3,7 +3,7 @@ unlockdown
 
 This repo demonstrates some ways to disable or bypass kernel lockdown on Ubuntu kernels without physical access to the machine, essentially bypassing this security feature.
 
-(Everything said here also probably [applies](https://bugzilla.redhat.com/show_bug.cgi?id=1599197) to Fedora, but I haven't performed any tests with it.)
+(Everything said here also probably applies to [Debian](https://salsa.debian.org/kernel-team/linux/tree/master/debian/patches/features/all/lockdown) and [Fedora](https://bugzilla.redhat.com/show_bug.cgi?id=1599197), but I haven't performed any tests with them.)
 
 ## Story
 
