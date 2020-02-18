@@ -3,6 +3,8 @@ unlockdown
 
 This repo demonstrates some ways to disable or bypass kernel lockdown on Ubuntu kernels without physical access to the machine, essentially bypassing this security feature.
 
+(Updated 18.02.2019.) At this point, all proposed bypass methods have been fixed.
+
 ## Story
 
 Once upon a time, while working on some [USB fuzzing](https://github.com/google/syzkaller/blob/master/docs/linux/external_fuzzing_usb.md) related stuff, I was about to trace the kernel via `kprobe` on my new laptop, but instead...
