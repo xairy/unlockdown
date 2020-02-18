@@ -3,8 +3,6 @@ unlockdown
 
 This repo demonstrates some ways to disable or bypass kernel lockdown on Ubuntu kernels without physical access to the machine, essentially bypassing this security feature.
 
-(Everything said here also probably applies to [Debian](https://salsa.debian.org/kernel-team/linux/tree/master/debian/patches/features/all/lockdown) and [Fedora](https://bugzilla.redhat.com/show_bug.cgi?id=1599197), but I haven't performed any tests with them.)
-
 ## Story
 
 Once upon a time, while working on some [USB fuzzing](https://github.com/google/syzkaller/blob/master/docs/linux/external_fuzzing_usb.md) related stuff, I was about to trace the kernel via `kprobe` on my new laptop, but instead...
@@ -106,7 +104,7 @@ Ubuntu's kernels have USB/IP enabled (`CONFIG_USBIP_VHCI_HCD=m` and `CONFIG_USBI
 [Here](https://github.com/xairy/unlockdown/blob/master/01-usbip/keyboard.c) you can find the code that emulates a keyboard over USB/IP and sends an Alt+SysRq+X key combination. [This script](https://github.com/xairy/unlockdown/blob/master/01-usbip/run.sh) shows how to run it.
 It's possible to simplify the implementation of this method by directly interacting with the VHCI driver to emulate a USB device, but I didn't bother with this.
 
-This method currently works on the latest Ubuntu kernels and has been [reported](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1861238) to Ubuntu.
+(Updated 18.02.2019.)  This method and has been fixed in [Ubuntu](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1861238), [Fedora](https://bugzilla.redhat.com/show_bug.cgi?id=1800859) and [Debian](https://salsa.debian.org/kernel-team/linux/commit/2204f19825db3d7cc3cbce9e37b53720437a3e7e) kernels by dropping the "Add a SysRq option to lift kernel lockdown" patch.
 
 ```
 # uname -a
