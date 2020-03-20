@@ -6,3 +6,4 @@ rootkit/rootkit.ko
 rootkit/rootkit.mod.c
 rootkit/rootkit.mod.o
 rootkit/rootkit.o
+02-evdev/evdev-sysrq
