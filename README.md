@@ -3,7 +3,7 @@ unlockdown
 
 This repo demonstrates some ways to disable or bypass kernel lockdown on Ubuntu (and some other) kernels without physical access to the machine, essentially bypassing this security feature.
 
-(Updated 18.02.2020.) At this point, all proposed bypass methods have been fixed on Ubuntu and Fedora ([Debian](https://github.com/xairy/unlockdown/issues/1) still in progress).
+(Updated 21.03.2020.) At this point, all proposed bypass methods have been fixed on Ubuntu, Fedora and Debian (see [this](https://github.com/xairy/unlockdown/issues/1) for details).
 
 ## Story
 
