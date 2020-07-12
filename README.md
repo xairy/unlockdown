@@ -191,7 +191,11 @@ done
 [  192.723791] Lifting lockdown
 ```
 
-### Method 3: TBD
+### Method 3: ACPI Tables
+
+See [American Unsigned Language](https://git.zx2c4.com/american-unsigned-language/tree/american-unsigned-language.sh) and [American Unsigned Language 2](https://git.zx2c4.com/american-unsigned-language/tree/american-unsigned-language-2.sh).
+
+### Method 4: TBD
 
 TBD.
 
