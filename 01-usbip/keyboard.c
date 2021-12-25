@@ -2,7 +2,11 @@
 // over USB/IP and sending a Alt+SysRq+X key combination.
 // See https://github.com/xairy/unlockdown for usage details.
 //
-// Vaguely based on https://github.com/lcgamboa/USBIP-Virtual-USB-Device.
+// Derived from:
+// - https://github.com/xairy/raw-gadget/blob/master/examples/keyboard.c
+// - https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/tools/usb/usbip/libsrc/usbip_common.h
+// - https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/usb/usbip/usbip_common.h
+// - https://github.com/lcgamboa/USBIP-Virtual-USB-Device
 //
 // Andrey Konovalov <andreyknvl@gmail.com>
 
