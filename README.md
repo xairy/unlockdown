@@ -242,3 +242,7 @@ Done! Check dmesg.
 [  175.953621] rootkit: module verification failed: signature and/or required key missing - tainting kernel
 [  175.953975] rootkit successfully loaded
 ```
+
+## No license
+
+The code in this repository comes with no attached license: parts of it are taken from random places all over the Internet and have unknown or conflicting licenses. Do not use this code if you care about legal consequences.
