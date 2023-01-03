@@ -3,7 +3,7 @@ unlockdown
 
 This repo demonstrates some ways to disable or bypass kernel lockdown on Ubuntu (and some other) kernels without physical access to the machine, essentially bypassing this security feature.
 
-(Updated 21.03.2020.) At this point, all proposed bypass methods have been fixed on Ubuntu, Fedora and Debian (see [this](https://github.com/xairy/unlockdown/issues/1) for details).
+(Updated 21.03.2020.) At this point, all outlined bypass methods have been fixed on Ubuntu, Fedora and Debian (see [this](https://github.com/xairy/unlockdown/issues/1) for details). The other linked methods might still work.
 
 ## Story
 
@@ -191,13 +191,16 @@ done
 [  192.723791] Lifting lockdown
 ```
 
-### Method 3: ACPI Tables
+### More methods
 
-See [American Unsigned Language](https://git.zx2c4.com/american-unsigned-language/tree/american-unsigned-language.sh) and [American Unsigned Language 2](https://git.zx2c4.com/american-unsigned-language/tree/american-unsigned-language-2.sh).
+- [American Unsigned Language](https://git.zx2c4.com/american-unsigned-language/tree/american-unsigned-language.sh) and [American Unsigned Language 2](https://git.zx2c4.com/american-unsigned-language/tree/american-unsigned-language-2.sh)
 
-### Method 4: TBD
+- [dkms packages generate insecure MOK, allow potential lockdown bypass](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1883949)
 
-TBD.
+- [CVE-2022-21499: trivial lockdown break](https://www.openwall.com/lists/oss-security/2022/05/24/7) and [fix](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=eadb2f47a3ced5c64b23b90fd2a3463f63726066)
+
+- [CVE-2022-21505: Kernel lockdown bypass bug](https://www.openwall.com/lists/oss-security/2022/07/19/4) and [fix](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=543ce63b664e2c2f9533d089a4664b559c3e6b5b)
+
 
 ## So what?
 
